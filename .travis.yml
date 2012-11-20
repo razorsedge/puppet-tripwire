@@ -5,6 +5,7 @@ script: "rake spec"
 branches:
   only:
     - master
+    - develop
 notifications:
   email:
     - github@razorsedge.org
