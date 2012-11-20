@@ -1,5 +1,5 @@
-tripwire Module
-===============
+Puppet Tripwire Module
+======================
 
 master branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tripwire.png?branch=master)](http://travis-ci.org/razorsedge/puppet-tripwire)
 develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-tripwire.png?branch=develop)](http://travis-ci.org/razorsedge/puppet-tripwire)
@@ -51,4 +51,8 @@ Copyright
 ---------
 
 Copyright (C) 2012 Mike Arnold <mike@razorsedge.org>
+
+[razorsedge/puppet-tripwire on GitHub](https://github.com/razorsedge/puppet-tripwire)
+
+[razorsedge/tripwire on Puppet Forge](http://forge.puppetlabs.com/razorsedge/tripwire)
 

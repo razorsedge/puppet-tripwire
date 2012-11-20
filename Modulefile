@@ -1,11 +1,11 @@
 name    'razorsedge-tripwire'
 version '0.0.1'
-source 'UNKNOWN'
 author 'razorsedge'
-license 'UNKNOWN'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+license 'Apache License, Version 2.0'
+project_page 'https://github.com/razorsedge/puppet-tripwire'
+source 'git://github.com/razorsedge/puppet-tripwire.git'
+summary 'Puppet Tripwire Module'
+description 'Install and configure Tripwire.'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+#dependency 'puppetlabs/stdlib', '>=2.1.0'
