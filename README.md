@@ -15,7 +15,7 @@ Actions:
 
 OS Support:
 
-* RedHat family - tested on CentOS 5.5+ and CentOS 6.2+
+* RedHat family - untested
 * SuSE family   - presently unsupported (patches welcome)
 * Debian family - presently unsupported (patches welcome)
 
