@@ -33,7 +33,7 @@
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
-class tripwire {
+class tripwire inherits tripwire::params {
   package { 'tripwire':
     ensure => 'present',
   }
@@ -65,21 +65,6 @@ class tripwire {
     group   => 'root',
     require => [ Package['tripwire'], Class['lsb'], ],
     path    => '/etc/tripwire/twpol.txt',
-#    content => $operatingsystem ? {
-#      /(centos|redhat|oel)/ => $operatingsystemrelease ? {
-#        '5'     => template('tripwire/twpol.txt-CentOS-5.erb'),
-#        '4'     => template('tripwire/twpol.txt-CentOS-4.erb'),
-#        default => template('tripwire/twpol.txt-CentOS.erb'),
-#      },
-#      Fedora                => $operatingsystemrelease ? {
-#        '12'    => $architecture ? {
-#          'i686'    => template('tripwire/twpol.txt-Fedora-12-i686.erb'),
-#          'x86_64'  => template('tripwire/twpol.txt-Fedora-12-x86_64.erb'),
-#          'powerpc' => template('tripwire/twpol.txt-Fedora-12-powerpc.erb'),
-#          default   => template('tripwire/twpol.txt-Fedora-12.erb'),
-#        default => template('tripwire/twpol.txt-Fedora.erb'),
-#      default               => template('tripwire/twpol.txt.erb'),
-#    },
     source  => [
       "puppet:///modules/tripwire/twpol.txt-${fqdn}",
       "puppet:///modules/tripwire/twpol.txt-${operatingsystem}-${lsbmajdistrelease}-${architecture}",
