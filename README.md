@@ -7,11 +7,12 @@ develop branch: [![Build Status](https://secure.travis-ci.org/razorsedge/puppet-
 Introduction
 ------------
 
-This module ....
+This module installs and configures the [Open Source Tripwire](http://sourceforge.net/projects/tripwire/) package.
 
 Actions:
 
-* None
+* Installs tripwire.
+* Configures tripwire.
 
 OS Support:
 
@@ -24,7 +25,12 @@ Class documentation is available via puppetdoc.
 Examples
 --------
 
-    include 'tripwire'
+Parameterized Class:
+
+    class { 'tripwire';
+      tripwire_site  = 'sitePassPhrase',
+      tripwire_local = 'nodePassPhrase',
+    }
 
 
 Notes
@@ -35,12 +41,15 @@ Notes
 Issues
 ------
 
-* None
+* Completely untested.
 
 TODO
 ----
 
-* None
+* Convert configuration files to templates.
+* Require stahnma/puppet-module-epel.
+* Validate input via stdlib.
+* Apply normal razorsedge/puppet patterns ($ensure/$autoupgrade).
 
 License
 -------

@@ -1,29 +1,33 @@
 # == Class: tripwire
 #
-# Full description of class tripwire here.
+# This class handles installing and configuring the Open Source Tripwire
+# package.
 #
 # === Parameters:
 #
-# Document parameters here.
+# [*tripwire_site*]
+#   The passphrase for the site.key file.
+#   Default: none
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*tripwire_local*]
+#   The passphrase for the local.key file.
+#   Default: none
 #
-# === Variables:
+# === Actions:
 #
-# Here you should define a list of variables that this module would require.
+# Installs tripwire.
+# Configures tripwire.
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if it
-#   has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should not be used in preference to class parameters  as of
-#   Puppet 2.6.)
+# === Requires:
+#
+# Nothing.
 #
 # === Sample Usage:
 #
-#  class { 'tripwire': }
+#  class { 'tripwire':
+#    tripwire_site  = 'sitePassPhrase',
+#    tripwire_local = 'nodePassPhrase',
+#  }
 #
 # === Authors:
 #
