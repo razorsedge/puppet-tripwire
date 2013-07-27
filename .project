@@ -3,6 +3,7 @@
 	<name>tripwire</name>
 	<comment></comment>
 	<projects>
+		<project>lsb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
