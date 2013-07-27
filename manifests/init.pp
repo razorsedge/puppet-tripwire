@@ -33,14 +33,17 @@
 #
 # Copyright (C) 2012 Mike Arnold, unless otherwise noted.
 #
-class tripwire inherits tripwire::params {
+class tripwire (
+  $tripwire_site,
+  $tripwire_local
+) inherits tripwire::params {
   package { 'tripwire':
     ensure => 'present',
   }
 
   file { 'site.key':
     ensure  => 'present',
-    mode    => '600',
+    mode    => '0600',
     owner   => 'root',
     group   => 'root',
     require => Package['tripwire'],
@@ -50,7 +53,7 @@ class tripwire inherits tripwire::params {
 
   file { 'twcfg.txt':
     ensure  => 'present',
-    mode    => '640',
+    mode    => '0640',
     owner   => 'root',
     group   => 'root',
     require => Package['tripwire'],
@@ -60,31 +63,32 @@ class tripwire inherits tripwire::params {
 
   file { 'twpol.txt':
     ensure  => 'present',
-    mode    => '640',
+    mode    => '0640',
     owner   => 'root',
     group   => 'root',
     require => [ Package['tripwire'], Class['lsb'], ],
     path    => '/etc/tripwire/twpol.txt',
     source  => [
-      "puppet:///modules/tripwire/twpol.txt-${fqdn}",
-      "puppet:///modules/tripwire/twpol.txt-${operatingsystem}-${lsbmajdistrelease}-${architecture}",
-      "puppet:///modules/tripwire/twpol.txt-${operatingsystem}-${lsbmajdistrelease}",
-      "puppet:///modules/tripwire/twpol.txt-${operatingsystem}",
-      "puppet:///modules/tripwire/twpol.txt",
+      "puppet:///modules/tripwire/twpol.txt-${::fqdn}",
+      "puppet:///modules/tripwire/twpol.txt-${::operatingsystem}-${::lsbmajdistrelease}-${::architecture}",
+      "puppet:///modules/tripwire/twpol.txt-${::operatingsystem}-${::lsbmajdistrelease}",
+      "puppet:///modules/tripwire/twpol.txt-${::operatingsystem}",
+      'puppet:///modules/tripwire/twpol.txt',
     ],
   }
 
-  file { "${fqdn}.twd":
-    ensure  => '/var/lib/tripwire/tripwire.twd',
+  file { "${::fqdn}.twd":
+    ensure  => 'link',
+    target  => '/var/lib/tripwire/tripwire.twd',
     owner   => 'root',
     group   => 'root',
     require => Exec['tripwire-init'],
-    path    => "/var/lib/tripwire/${fqdn}.twd",
+    path    => "/var/lib/tripwire/${::fqdn}.twd",
   }
 
   file { '/etc/tripwire':
     ensure  => 'directory',
-    mode    => '700',
+    mode    => '0700',
     owner   => 'root',
     group   => 'root',
     require => Package['tripwire'],
@@ -93,7 +97,7 @@ class tripwire inherits tripwire::params {
 
   file { 'tripwire-setup-keyfiles':
     ensure  => 'present',
-    mode    => '750',
+    mode    => '0750',
     owner   => 'root',
     group   => 'root',
     require => Package['tripwire'],
@@ -104,14 +108,22 @@ class tripwire inherits tripwire::params {
   exec { 'tripwire-setup-keyfiles':
     command     => '/etc/tripwire/tripwire-setup-keyfiles',
     creates     => '/etc/tripwire/local.key',
-    environment => [ "TWLOCALPASS=$tripwire_local", "TWSITEPASS=$tripwire_site", ],
-    require     => [ File['tripwire-setup-keyfiles'], File['twpol.txt'], File['twcfg.txt'], File['site.key'], ],
+    environment => [
+      "TWLOCALPASS=${tripwire_local}",
+      "TWSITEPASS=${tripwire_site}",
+    ],
+    require     => [
+      File['tripwire-setup-keyfiles'],
+      File['twpol.txt'],
+      File['twcfg.txt'],
+      File['site.key'],
+    ],
   }
 
   exec { 'tripwire-init':
-    command   => "/usr/sbin/tripwire --init --local-passphrase $tripwire_local --quiet",
+    command   => "/usr/sbin/tripwire --init --local-passphrase ${tripwire_local} --quiet",
     creates   => '/var/lib/tripwire/tripwire.twd',
-   #path      => '/sbin:/usr/sbin:/usr/local/sbin',
+    #path      => '/sbin:/usr/sbin:/usr/local/sbin',
     require   => Exec['tripwire-setup-keyfiles'],
     timeout   => 10000,
     logoutput => on_failure,
@@ -125,5 +137,4 @@ class tripwire inherits tripwire::params {
 #    timeout     => 10000,
 #    logoutput   => on_failure,
 #  }
-
 }
