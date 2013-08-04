@@ -51,6 +51,11 @@ TODO
 * Validate input via stdlib.
 * Apply normal razorsedge/puppet patterns ($ensure/$autoupgrade).
 
+Contributing
+------------
+
+Please see DEVELOP.md for contribution information.
+
 License
 -------
 
