@@ -1,6 +1,6 @@
 fixtures:
   repositories:
-#    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-    lsb: "git://github.com/razorsedge/puppet-lsb.git"
+#    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    lsb: "https://github.com/razorsedge/puppet-lsb.git"
   symlinks:
     tripwire: "#{source_dir}"
