@@ -9,7 +9,7 @@
 # Learn more about module testing here:
 #  http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-class { 'tripwire';
-  tripwire_site  = 'sitePassPhrase',
-  tripwire_local = 'nodePassPhrase',
+class { 'tripwire':
+  tripwire_site  => 'sitePassPhrase',
+  tripwire_local => 'nodePassPhrase',
 }
