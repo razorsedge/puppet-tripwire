@@ -43,7 +43,7 @@ describe 'tripwire', :type => 'class' do
       :require => 'Package[tripwire]'
     )}
 #    it 'should contain File[site.key] with correct contents' do
-#      verify_contents(subject, 'site.key', [
+#      verify_contents(catalogue, 'site.key', [
 #        'HOSTNAME=localhost.localdomain',
 #      ])
 #    end
