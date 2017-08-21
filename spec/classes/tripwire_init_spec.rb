@@ -17,6 +17,7 @@ describe 'tripwire', :type => 'class' do
   end
 
   context 'on a supported operatingsystem, default parameters' do
+    let(:pre_condition) { 'class {"lsb":}' }
     let :params do {
       :tripwire_site  => 'sitePW',
       :tripwire_local => 'localPW',
@@ -26,6 +27,7 @@ describe 'tripwire', :type => 'class' do
       :osfamily          => 'RedHat',
       :operatingsystem   => 'CentOS',
       :lsbmajdistrelease => '6',
+      :operatingsystemmajrelease => '6',
       :architecture      => 'x86_64',
       :fqdn              => 'localhost.localdomain',
     }
